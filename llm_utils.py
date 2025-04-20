@@ -18,8 +18,9 @@ def get_model_path():
     """
     import os
     
-    # Get HF token from environment
-    hf_token = os.getenv("HF_TOKEN") or os.getenv("HUGGING_FACE_HUB_TOKEN")
+    # Get HF token from secrets or environment
+    import streamlit as st
+    hf_token = st.secrets["HF_TOKEN"] if "HF_TOKEN" in st.secrets else os.getenv("HF_TOKEN") or os.getenv("HUGGING_FACE_HUB_TOKEN")
     print(f"[llm_utils] HF_TOKEN found: {hf_token}")
     if not hf_token:
         print("Warning: No HF_TOKEN found. You may need to set it for access to gated models.")

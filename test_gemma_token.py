@@ -10,7 +10,8 @@ from transformers import logging
 logging.set_verbosity_error()
 
 # Check for token
-hf_token = os.environ.get("HF_TOKEN") or os.environ.get("HUGGING_FACE_HUB_TOKEN")
+import streamlit as st
+hf_token = st.secrets["HF_TOKEN"] if "HF_TOKEN" in st.secrets else os.environ.get("HF_TOKEN") or os.environ.get("HUGGING_FACE_HUB_TOKEN")
 if not hf_token:
     print("⚠️ No HF_TOKEN environment variable found!")
     print("Please set it with: export HF_TOKEN=your_token_here")
