@@ -16,3 +16,6 @@ huggingface_hub>=0.20.0
 
 # Required for Flatlib ephemeris
 pyswisseph
+
+# Required for transformers device_map
+accelerate
