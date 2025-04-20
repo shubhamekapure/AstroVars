@@ -1,0 +1,15 @@
+# Web UI
+streamlit>=1.30.0
+
+# Astrology
+flatlib>=0.2.2
+
+# Geolocation and timezone
+timezonefinder>=6.2.0
+pytz>=2023.3
+geopy>=2.4.1
+
+# AI/ML
+transformers>=4.37.0
+torch>=2.1.0
+huggingface_hub>=0.20.0
