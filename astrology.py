@@ -1,3 +1,7 @@
+import os
+# Force Flatlib to use the Meeus backend if Swiss Ephemeris is not available
+os.environ['FLATLIB_EPHEMERIS'] = os.environ.get('FLATLIB_EPHEMERIS', 'meeus')
+
 from flatlib.chart import Chart
 from flatlib.datetime import Datetime
 from flatlib.geopos import GeoPos
