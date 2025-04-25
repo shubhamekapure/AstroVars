@@ -4,7 +4,7 @@ os.environ['FLATLIB_EPHEMERIS'] = os.environ.get('FLATLIB_EPHEMERIS', 'meeus')
 
 # --- AstroVars CLI Workflow ---
 def get_user_birth_details_and_interpret():
-    from llm_handler import run_llm
+    from handler import run_llm
     print("=== AstroVars Terminal ===")
     name = input("Name: ")
     place = input("Place of Birth (City, Country): ")

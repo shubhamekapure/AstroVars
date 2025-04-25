@@ -4,21 +4,21 @@
 ![Python Version](https://img.shields.io/badge/python-3.10%2B-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
-AstroVars is an AI-powered astrological matchmaking tool that provides personalized, structured insights about your ideal life partner. It uses the Together API for LLM-powered interpretations, delivering clear, actionable compatibility and matchmaking predictions based on your birth details.
+Astro-Vars is a sophisticated astrological analysis tool that leverages AI to provide personalized partner compatibility insights. By analyzing your birth chart using Google's Gemma 3 1B model, Astro-Vars delivers professional-grade interpretations about ideal partner traits.
 
 ## 🌟 Features
 
 - **Full Birth Chart Calculation**: Generate a complete natal chart with Sun, Moon, Ascendant, all planets, and houses
-- **AI-Powered Matchmaking**: Structured, markdown-formatted analysis of your ideal partner traits, including predicted name initial, likely location, and age range, using the Together API LLM
+- **AI-Powered Interpretation**: Detailed partner trait analysis using Google's Gemma 3 LLM
 - **Comprehensive Astrological Insights**: Analysis based on planetary positions, houses, elements, modalities, and aspects
 - **Smart Location Detection**: Automatic timezone adjustment based on geolocation
 - **Beautiful Streamlit Interface**: User-friendly UI for entering birth details
-- **Structured Markdown Output**: Easy-to-read, sectioned results for personality, romance, ideal partner, and match predictions
+- **Detailed Logging**: All AI interactions are logged for reference and improvement
 
 ## 📋 Requirements
 
 - Python 3.10+
-- Together API Key (for accessing the LLM)
+- Hugging Face API token (for accessing the Gemma 3 model)
 - Internet connection (for geocoding and model downloads)
 
 ## 🚀 Installation
@@ -40,9 +40,10 @@ AstroVars is an AI-powered astrological matchmaking tool that provides personali
    pip install -r requirements.txt
    ```
 
-4. Set your Together API key (replace with your actual key):
+4. Set your Hugging Face token:
    ```bash
-   export TOGETHER_API_KEY=your_actual_key_here
+   export HF_TOKEN=your_huggingface_token_here
+   # On Windows: set HF_TOKEN=your_huggingface_token_here
    ```
 
 ## 💫 Usage
@@ -79,7 +80,6 @@ To use this application, you'll need:
 
 - `app.py`: Main Streamlit application
 - `astrology.py`: Natal chart calculation functions
-- `llm_handler.py`: AI model integration for interpretations
 - `llm_utils.py`: Utilities for model management
 - `timezone_utils.py`: Handling timezone conversions
 - `prompt_engine.py`: Templates for AI prompts

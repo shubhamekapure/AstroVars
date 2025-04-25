@@ -1,8 +1,9 @@
 from llm_utils import runner
 
-def run_llm(name, date_of_birth, time_of_birth, place_of_birth):
+def run_llm(name, date_of_birth, time_of_birth, place_of_birth, temperature=0.8, max_tokens=512, top_p=0.95):
     """
     Calls the Together API LLM for an astrological interpretation focused on ideal partner traits, including predictions on name initial, location, and age.
+    You can control creativity and length with temperature, max_tokens, and top_p.
     """
     prompt = f"""
 You are a highly skilled Vedic astrologer and relationship expert. Based on the following birth details, give a short and structured matchmaking analysis.
@@ -39,5 +40,6 @@ Keep it clear, under 450 words total, with bullet points only (no long paragraph
 
 Be friendly, insightful, and easy to understand. Keep each section short and focused.
 """
-    return runner(prompt)
+    return runner(prompt, temperature=temperature, max_tokens=max_tokens, top_p=top_p)
+
 
