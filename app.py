@@ -1,6 +1,11 @@
 import streamlit as st
+import os
 import datetime
 from handler import run_llm
+
+# Set Together API key from Streamlit secrets for deployment
+if "TOGETHER_API_KEY" in st.secrets and not os.getenv("TOGETHER_API_KEY"):
+    os.environ["TOGETHER_API_KEY"] = st.secrets["TOGETHER_API_KEY"]
 
 st.set_page_config(page_title="AstroVars", page_icon="🌬️", layout="centered")
 st.title("🔮 AstroVars: Ideal Partner by Astrology")
