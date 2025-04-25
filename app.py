@@ -1,14 +1,15 @@
 import streamlit as st
-from llm_handler import run_llm
+import datetime
+from handler import run_llm
 
-st.set_page_config(page_title="AstroVars: AI Astrology", page_icon="🔮", layout="centered")
-st.title("🔮 AstroVars: AI Astrology App")
-st.write("Enter your birth details to receive a personalized astrological interpretation from our AI astrologer.")
+st.set_page_config(page_title="AstroVars", page_icon="🌬️", layout="centered")
+st.title("🔮 AstroVars: Ideal Partner by Astrology")
+st.write("Enter your birth details to receive astrological interpretation of your (soon) ideal life partner.")
 
 with st.form("astrovars_form"):
     name = st.text_input("Name")
     place = st.text_input("Place of Birth (City, Country)")
-    date = st.date_input("Date of Birth")
+    date = st.date_input("Date of Birth", min_value=datetime.date(1950, 1, 1))
     time = st.time_input("Time of Birth")
     submit = st.form_submit_button("Get AI Interpretation")
 
