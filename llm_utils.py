@@ -6,7 +6,7 @@ from together import Together
 
 # SECURITY: Do NOT hardcode your API key! Set it as an environment variable: TOGETHER_API_KEY
 
-def runner(prompt, model="meta-llama/Llama-3.3-70B-Instruct-Turbo-Free", temperature=0.9, max_tokens=700, top_p=0.95):
+def runner(prompt, model="meta-llama/Llama-4-Scout-17B-16E-Instruct", temperature=1, max_tokens=700, top_p=0.9):
     """
     Calls the Together API for LLM chat completion.
     Args:
