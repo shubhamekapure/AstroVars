@@ -1,39 +1,26 @@
 """
-Utilities for LLM model management: download and return local model path.
+Utilities for LLM model management: now supports Together API for LLM calls.
 """
 import os
-from huggingface_hub import snapshot_download
+from together import Together
 
-# Environment variable pointing to the HuggingFace repo ID or local path of your LLM model
-MODEL_REPO = os.getenv("HF_MODEL_ID", "google/gemma-3-1b-it")
-# Optional: specify a directory to download the model into (default: "models")
-LOCAL_DIR = os.getenv("HF_CACHE_DIR", "models")
+# SECURITY: Do NOT hardcode your API key! Set it as an environment variable: TOGETHER_API_KEY
 
-def get_model_path():
+def run_llm(prompt, model="meta-llama/Llama-3.3-70B-Instruct-Turbo-Free"):
     """
-    Download the model from the HuggingFace Hub if not already present and return the local path.
-    Uses HF_TOKEN environment variable for authentication to access gated models.
+    Calls the Together API for LLM chat completion.
+    Args:
+        prompt (str): The user prompt for the LLM.
+        model (str): Together model name. Default: Llama-3 70B Turbo.
     Returns:
-        str: path to the local model directory
+        str: The model's reply.
     """
-    import os
-    
-    # Get HF token from secrets or environment
-    import streamlit as st
-    hf_token = st.secrets["HF_TOKEN"] if "HF_TOKEN" in st.secrets else os.getenv("HF_TOKEN") or os.getenv("HUGGING_FACE_HUB_TOKEN")
-    print(f"[llm_utils] HF_TOKEN found: {hf_token}")
-    if not hf_token:
-        print("Warning: No HF_TOKEN found. You may need to set it for access to gated models.")
-        print("Try: export HF_TOKEN=your_token_here")
-    
-    # Download the model with token
-    print(f"Downloading model: {MODEL_REPO}")
-    path = snapshot_download(
-        repo_id=MODEL_REPO, 
-        local_dir=LOCAL_DIR,
-        token=hf_token,
-        ignore_patterns=["*.bin", "*.h5"]  # Only download model config and tokenizer initially
+    api_key = os.getenv("TOGETHER_API_KEY")
+    if not api_key:
+        raise ValueError("TOGETHER_API_KEY environment variable not set.")
+    client = Together(api_key=api_key)
+    response = client.chat.completions.create(
+        model=model,
+        messages=[{"role": "user", "content": prompt}]
     )
-    
-    print(f"Model files downloaded to {path}")
-    return path
+    return response.choices[0].message.content.strip()
